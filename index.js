@@ -24,7 +24,12 @@ const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  */
 client.on("ready", () => {
   console.log(`${client.user.username} ready!`);
-  client.user.setActivity(`${PREFIX}help and ${PREFIX}play`, { type: "LISTENING" });
+  client.user.setPresence({
+		game: {
+			name: 'Aku bosan~ | ~help',
+			type: 'PLAYING',
+		}
+	})
 });
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);
@@ -39,6 +44,16 @@ for (const file of commandFiles) {
 }
 
 client.on("message", async (message) => {
+  //KaruiCommand
+	//List chat commands :
+	if (message.content.toLowerCase() === "halo"){
+		message.reply('Halo juga, Master~:heart:');
+	}
+	else if (message.content.toLowerCase() === 'ping'){
+		message.reply('Pong~');
+	}
+  
+  
   if (message.author.bot) return;
   if (!message.guild) return;
 
