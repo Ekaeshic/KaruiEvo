@@ -52,6 +52,9 @@ client.on("message", async (message) => {
 	else if (message.content.toLowerCase() === 'ping'){
 		message.reply('Pong~');
 	}
+	if (message.content.toLowerCase() === "gan"){
+		message.reply('Kalo mau tanya, tinggal sebutin pertanyaannya dulu. Tidak perlu nulis "Gan" terus nunggu sampai ada orang respon. https://imgur.com/gallery/UjXRnYc');
+	}
   
   
   if (message.author.bot) return;
