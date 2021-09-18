@@ -20,7 +20,7 @@ async function autoScroll(page){
 }
 
 var count = 0;
-let meme = [];
+let meme;
 module.exports = {
   name: "meme",
   description: i18n.__("meme.description"),
@@ -29,7 +29,12 @@ module.exports = {
         message.channel.send('Tunggu sebentar ya~ karui mau buka fb dulu...').then((msg) => {
             const puppeteer = require("puppeteer");
             (async () => {
-            const browser = await puppeteer.launch({ headless: true });
+            const browser = await puppeteer.launch({
+                'args' : [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox'
+                  ]
+            });
             const page = await browser.newPage();
             await page.goto("https://facebook.com/");
             await page.waitForSelector("#email");
@@ -55,6 +60,7 @@ module.exports = {
                 return links;
             
             });
+            if(!meme) meme = list;
             meme.concat(list);
             msg.edit(meme[count]);
             count++;
@@ -73,10 +79,10 @@ module.exports = {
         });
     }
     
-    if(!meme || count>meme.length){
+    if(!meme || count>=meme.length){
         refresh();
     }
-    else if(count<=meme.length){
+    else if(count<meme.length){
         message.channel.send(meme[count]);
         count++;
     }

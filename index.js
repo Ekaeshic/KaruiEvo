@@ -30,6 +30,9 @@ client.on("ready", () => {
 			type: 'PLAYING',
 		}
 	})
+  client.user.setActivity('coba ~meme | ~help untuk list perintah~', { type: 'WATCHING' })
+  .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
+  .catch(console.error);
 });
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);
@@ -103,6 +106,8 @@ client.on("message", async (message) => {
     message.reply(i18n.__("common.errorCommand")).catch(console.error);
   }
 });
+
+
 
 /*(async () => {
   const browser = await puppeteer.launch({ headless: false });

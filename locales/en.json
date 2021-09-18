@@ -34,7 +34,7 @@
     "result": "<@{author}> 🚚 moved **{title}** to {index} in the queue."
   },
   "meme": {
-    "description": "Cari meme dari fesbuk",
+    "description": "Cari meme dari fesbuk karui",
     "notFound": "Maaf, karui gak nemu gambarnya >.<",
     "errOutOfArray" : "Waduhh mohon maaf >.< Karui mengalami masalah."
   },
