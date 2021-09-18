@@ -103,3 +103,24 @@ client.on("message", async (message) => {
     message.reply(i18n.__("common.errorCommand")).catch(console.error);
   }
 });
+
+/*(async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+  await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
+  await page.type("#username", "19081010105");
+  await page.type("#password", "12082001");
+  await page.click("#loginbtn");
+  try {
+    if(page.waitForSelector(".empty-placeholder-image-lg")){
+      console.log("Tidak ada matkul");
+    }
+    else{
+      const satu = document.getElementById('label_3_12').getAttribute('href');
+    }
+  } catch (error) {
+    
+  };
+
+
+})();*/
