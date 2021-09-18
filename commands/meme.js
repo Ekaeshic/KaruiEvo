@@ -20,7 +20,7 @@ async function autoScroll(page){
 }
 
 var count = 0;
-let meme = [];
+let meme;
 module.exports = {
   name: "meme",
   description: i18n.__("meme.description"),
