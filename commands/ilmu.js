@@ -34,11 +34,6 @@ function arraysEqual(a, b) {
   if(a.length>b.length) length=a.length;
   else length=b.length;
 
-  // If you don't care about the order of the elements inside
-  // the array, you should sort both arrays here.
-  // Please note that calling sort on an array will modify that array.
-  // you might want to clone your array first.
-
   for (var i = 0; i < length; ++i) {
     if (a[i].judul !== b[i].judul){
       const embed = new Discord.MessageEmbed()
