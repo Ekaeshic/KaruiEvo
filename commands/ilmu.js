@@ -73,7 +73,12 @@ function arraysEqual(a, b) {
 
 function refresh(){
   (async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({
+      'args' : [
+          '--no-sandbox',
+          '--disable-setuid-sandbox'
+        ]
+  });
     const page = await browser.newPage();
     await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
     await page.type("#username", "19081010105");
