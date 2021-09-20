@@ -46,7 +46,7 @@ module.exports = {
             await page.goto("https://facebook.com/");
     
             await autoScroll(page)
-            list = await page.evaluate(()=> {
+            meme = await page.evaluate(()=> {
                 const feeds = document.querySelectorAll('[role="feed"] [data-pagelet]');
                 const links = [];
                 feeds.forEach((img) => {
@@ -61,8 +61,7 @@ module.exports = {
                 return links;
             
             });
-            if(!meme) meme = list;
-            meme = [...new Set([...meme, ...list])];
+            count = 0;
             msg.edit(meme[count]);
             used=false;
             count++;

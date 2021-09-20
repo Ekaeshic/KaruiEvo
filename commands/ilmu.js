@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const i18n = require("../util/i18n");
 const Discord = require("discord.js");
 
-const CHANNEL_ID = '682299286397911107';
+const CHANNEL_ID = '804362969513328640';
 
 let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto'],
@@ -65,7 +65,7 @@ function arraysEqual(a, b) {
           embed.setTitle('Ada ${b[i].jenis} baru dari mata kuliah ${b[i].matkul}!');
           embed.setColor('#2D042D');
       }
-      client.channels.get('682299286397911107').send(embed);
+      client.channels.get(CHANNEL_ID).send(embed);
     }
   }
   return true;
