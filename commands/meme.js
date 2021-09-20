@@ -21,6 +21,7 @@ async function autoScroll(page){
 
 var count = 0;
 let meme;
+let used = false;
 module.exports = {
   name: "meme",
   description: i18n.__("meme.description"),
@@ -61,8 +62,9 @@ module.exports = {
             
             });
             if(!meme) meme = list;
-            meme.concat(list);
+            meme = [...new Set([...meme, ...list])];
             msg.edit(meme[count]);
+            used=false;
             count++;
             /*for(i=1; i<=15; i++){
                 await page.screenshot({
@@ -75,12 +77,17 @@ module.exports = {
                 }
                 });
             }*/
+            await page.close();
             })();
         });
     }
     
     if(!meme || count>=meme.length){
-        refresh();
+        if(used) message.channel.send('Maaf, perintah ini sedang dijalankan~');
+        else {
+            used=true;
+            refresh();
+        }
     }
     else if(count<meme.length){
         message.channel.send(meme[count]);
