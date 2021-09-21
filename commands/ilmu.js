@@ -130,7 +130,7 @@ function refresh(){
        console.log('fetch ilmu success');
       await browser.close();
     } catch (error) {
-      return console.error(error);
+      return console.log('connection failed..');
     }
   })();
 }
