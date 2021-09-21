@@ -71,7 +71,8 @@ function refresh(){
     const browser = await puppeteer.launch({
       'args' : [
           '--no-sandbox',
-          '--disable-setuid-sandbox'
+          '--disable-setuid-sandbox',
+          '--proxy-server=139.99.74.79:8080'
         ]
   });
     const page = await browser.newPage();
@@ -79,6 +80,7 @@ function refresh(){
     await page.type("#username", "19081010105");
     await page.type("#password", "12082001");
     await page.click("#loginbtn");
+    console.log('connected');
     await page.waitForNavigation();
     for(let i=0;i<matkul.length;i++){
       await page.goto(matkul[i][0]);

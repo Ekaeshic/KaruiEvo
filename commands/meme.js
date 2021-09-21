@@ -10,7 +10,7 @@ async function autoScroll(page){
                 window.scrollBy(0, distance);
                 totalHeight += distance;
 
-                if(totalHeight >= 12000){
+                if(totalHeight >= 9000){
                     clearInterval(timer);
                     resolve();
                 }
@@ -75,7 +75,8 @@ module.exports = {
                     height: 880
                 }
                 });
-            }*/
+            }
+            */
             await page.close();
             })();
         });
