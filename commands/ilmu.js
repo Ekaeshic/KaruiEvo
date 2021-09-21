@@ -77,7 +77,7 @@ function refresh(){
   });
     const page = await browser.newPage();
     try {
-      await page.goto("https://ilmu.upnjatim.ac.id/");
+      await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
     } catch (error) {
       return console.error(error);
     }
