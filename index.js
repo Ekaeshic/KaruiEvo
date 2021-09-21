@@ -107,7 +107,7 @@ client.on("message", async (message) => {
   }
 });
 
-const ilmu = require('./commands/ilmu');
+//const ilmu = require('./commands/ilmu');
 
 /*(async () => {
   const browser = await puppeteer.launch({ headless: false });

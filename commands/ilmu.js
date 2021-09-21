@@ -3,7 +3,7 @@ const i18n = require("../util/i18n");
 const Discord = require("discord.js");
 
 const CHANNEL_ID = '804362969513328640';
-
+/*
 let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7822','KECERDASAN BUATAN KELAS C-Intan Yuniar'],
@@ -130,3 +130,4 @@ function refresh(){
   })();
 }
 
+*/
