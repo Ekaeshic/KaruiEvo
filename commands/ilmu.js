@@ -24,7 +24,7 @@ function checkTugas(){
     console.log('Mengecek....');
     old = materi;
     refresh();
-    setTimeout(arraysEqual, 24000, old, materi);
+    setTimeout(arraysEqual, 10000, old, materi);
   }
 }
 
@@ -65,7 +65,6 @@ function arraysEqual(a, b) {
   }
   return true;
 }
-
 function refresh(){
   (async () => {
     const browser = await puppeteer.launch({
@@ -78,58 +77,60 @@ function refresh(){
     const page = await browser.newPage();
     try {
       await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
+      await page.waitForSelector('#username', '19081010105');
+      await page.type("#username", "19081010105");
+      await page.type("#password", "12082001");
+      await page.click("#loginbtn");
+      console.log('connected');
+      await page.waitForNavigation();
+      for(let i=0;i<matkul.length;i++){
+        await page.goto(matkul[i][0]);
+        await page.waitForSelector('.section.img-text');
+        const kuliah = await page.evaluate(() => {
+          const scrape = document.querySelectorAll('.section.img-text .activity');
+          let submateri = [];
+          if(scrape.length>1){
+            scrape.forEach((bagian) => {
+              let judul, deskripsi, jenis;
+              const matkul = document.querySelector('#page > div.internalbanner > div > h1').textContent;
+              const link = window.location.href;
+              if(bagian.getElementsByClassName('activityinstance').length>0){
+                judul = bagian.querySelector('.instancename').textContent;
+                if(bagian.getElementsByClassName('contentafterlink').length>0){
+                  deskripsi = bagian.querySelector('.contentafterlink .no-overflow').textContent;
+                }
+                if(bagian.getElementsByClassName('accesshide').length>0){
+                  jenis = bagian.querySelector('.accesshide').textContent;                  
+                }
+              }
+              else if(bagian.getElementsByClassName('contentwithoutlink')){
+                judul = 'Pemberitahuan';
+                deskripsi = document.querySelector('.contentwithoutlink').textContent;
+                jenis = 'pemberitahuan';
+              }
+              const tugas = {
+                'matkul': matkul,
+                'judul': judul,
+                'deskripsi': deskripsi,
+                'jenis': jenis,
+                'link': link
+              }
+              submateri.push(tugas);
+            });
+            return submateri;
+          }
+          else{
+            return;
+          }
+        });
+        if(kuliah){
+          materi = [...new Set([...materi, ...kuliah])];
+        }
+      }
+       console.log('fetch ilmu success');
+      await browser.close();
     } catch (error) {
       return console.error(error);
     }
-    await page.type("#username", "19081010105");
-    await page.type("#password", "12082001");
-    await page.click("#loginbtn");
-    console.log('connected');
-    await page.waitForNavigation();
-    for(let i=0;i<matkul.length;i++){
-      await page.goto(matkul[i][0]);
-      await page.waitForSelector('.section.img-text');
-      const kuliah = await page.evaluate(() => {
-        const scrape = document.querySelectorAll('.section.img-text .activity');
-        let submateri = [];
-        if(scrape.length>1){
-          scrape.forEach((bagian) => {
-            let judul, deskripsi, jenis;
-            const matkul = document.querySelector('#page > div.internalbanner > div > h1').textContent;
-            const link = window.location.href;
-            if(bagian.getElementsByClassName('activityinstance').length>0){
-              judul = bagian.querySelector('.instancename').textContent;
-              if(bagian.getElementsByClassName('contentafterlink').length>0){
-                deskripsi = bagian.querySelector('.contentafterlink .no-overflow').textContent;
-              }
-              if(bagian.getElementsByClassName('accesshide').length>0){
-                jenis = bagian.querySelector('.accesshide').textContent;                  
-              }
-            }
-            else if(bagian.getElementsByClassName('contentwithoutlink')){
-              judul = 'Pemberitahuan';
-              deskripsi = document.querySelector('.contentwithoutlink').textContent;
-              jenis = 'pemberitahuan';
-            }
-            const tugas = {
-              'matkul': matkul,
-              'judul': judul,
-              'deskripsi': deskripsi,
-              'jenis': jenis,
-              'link': link
-            }
-            submateri.push(tugas);
-          });
-          return submateri;
-        }
-        else{
-          return;
-        }
-      });
-      if(kuliah){
-        materi = [...new Set([...materi, ...kuliah])];
-      }
-    }
-    await browser.close();
   })();
 }
