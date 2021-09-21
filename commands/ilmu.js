@@ -14,7 +14,7 @@ let matkul = [
 let materi = [];
 
 refresh();
-setInterval(checkTugas, 1800000);
+setInterval(checkTugas, 600000);
 
 function checkTugas(){
   if(materi.length==0){
@@ -24,7 +24,7 @@ function checkTugas(){
     console.log('Mengecek....');
     old = materi;
     refresh();
-    setTimeout(arraysEqual, 10000, old, materi);
+    setTimeout(arraysEqual, 24000, old, materi);
   }
 }
 
