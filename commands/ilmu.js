@@ -76,7 +76,11 @@ function refresh(){
         ]
   });
     const page = await browser.newPage();
-    await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
+    try {
+      await page.goto("https://ilmu.upnjatim.ac.id/");
+    } catch (error) {
+      return console.error(error);
+    }
     await page.type("#username", "19081010105");
     await page.type("#password", "12082001");
     await page.click("#loginbtn");
