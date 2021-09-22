@@ -14,7 +14,7 @@ let matkul = [
 let materi = [];
 
 refresh();
-setInterval(checkTugas, 600000);
+setInterval(checkTugas, 300000);
 
 function checkTugas(){
   if(materi.length==0){
