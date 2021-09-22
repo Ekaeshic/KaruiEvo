@@ -29,12 +29,7 @@ function checkTugas(){
 }
 
 function arraysEqual(a, b) {
-  if (a === b) return true;
-  let length;
-  if(a.length>b.length) length=a.length;
-  else length=b.length;
-
-  for (var i = 0; i < length; ++i) {
+  for (var i = 0; i < b.length; ++i) {
     if (a[i].judul !== b[i].judul){
       const embed = new Discord.MessageEmbed()
         .setAuthor(b[i].matkul)
@@ -63,10 +58,10 @@ function arraysEqual(a, b) {
       }
       const wc = new Discord.WebhookClient('889867515528884324','rrdyzkNRVsgufFiuLIRTvipFUaLWfSw6uTnS-9si37AiEX10sBQ7ePW8npz4jYZjdSON');
       wc.send(embed);
+      return;
     }
-  else return console.log('Tidak ada perubahan..');
   }
-  return true;
+  return console.log('Tidak ada perubahan..');
 }
 function refresh(){
   (async () => {
