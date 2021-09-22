@@ -73,8 +73,7 @@ function refresh(){
     const browser = await puppeteer.launch({
       'args' : [
           '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--proxy-server=139.99.74.79:8080'
+          '--disable-setuid-sandbox'
         ]
   });
     const page = await browser.newPage();
