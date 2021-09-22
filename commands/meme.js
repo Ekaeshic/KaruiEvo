@@ -29,7 +29,7 @@ module.exports = {
   execute(message) {
     function refresh(){
         message.channel.send('Tunggu sebentar ya~ karui mau buka fb dulu...').then((msg) => {
-            try {
+           
                 (async () => {
                 const browser = await puppeteer.launch({
                     'args' : [
@@ -38,6 +38,7 @@ module.exports = {
                         ]
                 });
                 const page = await browser.newPage();
+try{
                 await page.goto("https://facebook.com/");
                 await page.waitForSelector("#email");
                 await page.type("#email", "kucing.upnjatim@gmail.com");
@@ -79,11 +80,12 @@ module.exports = {
                 }
                 */
                 await page.close();
-                })();
-            } catch (error) {
+} catch (error) {
+await page.close();
                 console.log('failed to fetch facebook..');
                 msg.edit('Awwww... Karui gagal buka fesbuk T.T');
             }
+                })();
         });
     }
     
