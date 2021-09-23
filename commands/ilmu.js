@@ -11,10 +11,9 @@ let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7816','VISI KOMPUTER KELAS A Fetty Tri'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto']
 ];
-let materi = []; //wewewwwewewe trigger heroku
+let materi = refresh(); //wewewwwewewe trigger heroku
 let old = [];
 
-refresh();
 setInterval(checkTugas, 180000);
 
 function checkTugas(){
@@ -24,7 +23,7 @@ function checkTugas(){
   else{
     console.log('Mengecek....');
     old = materi;
-    refresh();
+    materi = refresh();
     setTimeout(arraysEqual, 24000, old, materi);
   }
 }
@@ -144,12 +143,12 @@ function refresh(){
             return;
           }
         });
-        if(kuliah){
-          materi.push(kuliah);
-        }
       }
-      console.log('fetch ilmu success');
+      console.log('fetch ilmu success')
       await page.close();
+      if(kuliah){
+        return kuliah;
+      }
     } catch (error) {
       return console.log('connection failed..');
     }
