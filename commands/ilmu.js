@@ -18,14 +18,18 @@ setInterval(checkTugas, 180000);
 
 function checkTugas(){
   if(materi.length==0){
-    refresh();
+    materi = refresh();
   }
   else{
     console.log('Mengecek....');
     const old = materi;
     materi = refresh();
-    setTimeout(arraysEqual, 24000, old, materi);
+    setTimeout(wait, 30000);
+    arraysEqual(old, materi);
   }
+}
+function wait(){
+    console.log(comparing..);
 }
 
 function arraysEqual(a, b) {
