@@ -31,6 +31,7 @@ function checkTugas(){
 }
 function wait(){
     console.log('comparing..');
+    console.log(old);
     arraysEqual(old, materi);
 }
 
