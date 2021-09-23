@@ -166,6 +166,7 @@ function refresh(){
       await page.close();
     } catch (error) {
       return console.log('connection failed..');
+      materi = old; //BISMILLAH WORK AMINNNN
       await page.close();
     }
   })();
