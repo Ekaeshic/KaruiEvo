@@ -11,10 +11,11 @@ let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7816','VISI KOMPUTER KELAS A Fetty Tri'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto']
 ];
-let materi = [];
-materi = refresh(); //wewewwwewewe trigger heroku
+let materi = []; //wewewwwewewe trigger heroku
+let old = [];
 
-setInterval(checkTugas, 180000);
+refresh();
+setInterval(checkTugas, 185000);
 
 function checkTugas(){
   if(materi.length==0 || !materi){
@@ -23,8 +24,8 @@ function checkTugas(){
   else{
     console.log('Mengecek....');
     const old = materi;
-    materi = refresh();
-    setTimeout(wait, 30000);
+    refresh();
+    setTimeout(wait, 35000);
     arraysEqual(old, materi);
   }
 }
@@ -102,7 +103,6 @@ function refresh(){
       await page.click("#loginbtn");
       console.log('connected');
       await page.waitForNavigation();
-const temp=[];
       materi = [];
       for(let i=0;i<matkul.length;i++){
         await page.goto(matkul[i][0]);
@@ -148,13 +148,12 @@ const temp=[];
             return;
           }
         });
-if(kuliah){
-        temp.push(kuliah);
+        if(kuliah){
+          materi.push(kuliah);
+        }
       }
-      }
-      console.log('fetch ilmu success')
+      console.log('fetch ilmu success');
       await page.close();
-return temp;
     } catch (error) {
       return console.log('connection failed..');
     }
