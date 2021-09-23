@@ -5,11 +5,11 @@ const Discord = require("discord.js");
 const CHANNEL_ID = '804362969513328640';
 
 let matkul = [
-    ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7822','KECERDASAN BUATAN KELAS C-Intan Yuniar'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7815','DESAIN ANTARMUKA KELAS D-Agung Mustika'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7829','MACHINE LEARNING KELAS A Andreas Nugroho'],
-    ['https://ilmu.upnjatim.ac.id/course/view.php?id=7816','VISI KOMPUTER KELAS A Fetty Tri']
+    ['https://ilmu.upnjatim.ac.id/course/view.php?id=7816','VISI KOMPUTER KELAS A Fetty Tri'],
+    ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto']
 ];
 let materi = []; //wewewwwewewe trigger heroku
 
