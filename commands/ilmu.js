@@ -17,7 +17,7 @@ materi = refresh(); //wewewwwewewe trigger heroku
 setInterval(checkTugas, 180000);
 
 function checkTugas(){
-  if(materi.length==0){
+  if(materi.length==0 || !materi){
     materi = refresh();
   }
   else{
