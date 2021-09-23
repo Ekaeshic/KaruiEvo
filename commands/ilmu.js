@@ -11,7 +11,8 @@ let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7816','VISI KOMPUTER KELAS A Fetty Tri'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto']
 ];
-let materi = refresh(); //wewewwwewewe trigger heroku
+let materi = [];
+materi = refresh(); //wewewwwewewe trigger heroku
 
 setInterval(checkTugas, 180000);
 
