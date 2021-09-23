@@ -165,6 +165,7 @@ function refresh(){
       await page.close();
     } catch (error) {
       return console.log('connection failed..');
+      await page.close();
     }
   })();
 }
