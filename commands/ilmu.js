@@ -31,14 +31,14 @@ function checkTugas(){
 }
 function wait(){
     console.log('comparing..');
-    if(old && materi){
+    if(old && materi){ //bismillah no buggggg amiinnnn ya allah
         console.log(`${old.length}, 1st: ${old[0].length}`);
        arraysEqual(old, materi);
     }
     else {
-console.log('Ada yg null... Mengulang..');
-materi = old;
-checkTugas();
+        console.log('Ada yg null... Mengulang..');
+        materi = old;
+        checkTugas(); //bismillah work aminnnnn
     }
 }
 
@@ -94,6 +94,7 @@ function arraysEqual(a, b) {
   console.log(`Perbandingan : old=${totalOld}:new=${totalNew}`);
 }
 
+//Weeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 //refresh fetch weeeeeeeeee
 function refresh(){
   (async () => {
