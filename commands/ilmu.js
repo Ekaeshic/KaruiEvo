@@ -31,8 +31,8 @@ function checkTugas(){
 }
 function wait(){
     console.log('comparing..');
-    console.log(`${old.length}, 1st: ${old[0].length}`);
     if(old && materi){
+        console.log(`${old.length}, 1st: ${old[0].length}`);
        arraysEqual(old, materi);
     }
     else {
