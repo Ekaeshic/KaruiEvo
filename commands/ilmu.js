@@ -25,13 +25,13 @@ function checkTugas(){
     console.log('Mengecek....');
     old = materi;
     refresh();
-    setTimeout(wait, 35000);
+    setTimeout(wait, 90000);
     
   }
 }
 function wait(){
     console.log('comparing..');
-    console.log(old);
+    console.log(`${old.length}, 1st: ${old[0].length}`);
     arraysEqual(old, materi);
 }
 
