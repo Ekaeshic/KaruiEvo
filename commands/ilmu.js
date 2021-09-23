@@ -11,7 +11,7 @@ let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7829','MACHINE LEARNING KELAS A Andreas Nugroho'],
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7816','VISI KOMPUTER KELAS A Fetty Tri']
 ];
-let materi = [];
+let materi = []; //wewewwwewewe trigger heroku
 
 refresh();
 setInterval(checkTugas, 300000);
@@ -79,6 +79,8 @@ function arraysEqual(a, b) {
   }
   console.log(`Perbandingan : old=${totalOld}:new=${totalNew}`);
 }
+
+//refresh fetch weeeeeeeeee
 function refresh(){
   (async () => {
     const browser = await puppeteer.launch({
