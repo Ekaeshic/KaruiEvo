@@ -12,6 +12,7 @@ let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto']
 ];
 let materi = []; //wewewwwewewe trigger heroku
+let old = [];
 
 refresh();
 setInterval(checkTugas, 300000);
@@ -22,7 +23,6 @@ function checkTugas(){
   }
   else{
     console.log('Mengecek....');
-    old = materi;
     refresh();
     setTimeout(arraysEqual, 24000, old, materi);
   }
@@ -98,6 +98,7 @@ function refresh(){
       await page.click("#loginbtn");
       console.log('connected');
       await page.waitForNavigation();
+      old = materi;
       materi = [];
       for(let i=0;i<matkul.length;i++){
         await page.goto(matkul[i][0]);
