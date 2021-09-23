@@ -32,7 +32,14 @@ function checkTugas(){
 function wait(){
     console.log('comparing..');
     console.log(`${old.length}, 1st: ${old[0].length}`);
-    arraysEqual(old, materi);
+    if(old && materi){
+       arraysEqual(old, materi);
+    }
+    else {
+console.log('Ada yg null... Mengulang..');
+materi = old;
+checkTugas();
+    }
 }
 
 function arraysEqual(a, b) {
