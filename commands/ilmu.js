@@ -29,7 +29,7 @@ function checkTugas(){
   }
 }
 function wait(){
-    console.log(comparing..);
+    console.log('comparing..');
 }
 
 function arraysEqual(a, b) {
