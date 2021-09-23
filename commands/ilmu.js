@@ -12,7 +12,6 @@ let matkul = [
     ['https://ilmu.upnjatim.ac.id/course/view.php?id=7838','PEMROGRAMAN WEB KELAS C-Sugiarto']
 ];
 let materi = refresh(); //wewewwwewewe trigger heroku
-let old = [];
 
 setInterval(checkTugas, 180000);
 
@@ -22,7 +21,7 @@ function checkTugas(){
   }
   else{
     console.log('Mengecek....');
-    old = materi;
+    const old = materi;
     materi = refresh();
     setTimeout(arraysEqual, 24000, old, materi);
   }
@@ -98,6 +97,7 @@ function refresh(){
       await page.click("#loginbtn");
       console.log('connected');
       await page.waitForNavigation();
+const temp=[];
       materi = [];
       for(let i=0;i<matkul.length;i++){
         await page.goto(matkul[i][0]);
@@ -143,12 +143,13 @@ function refresh(){
             return;
           }
         });
+if(kuliah){
+        temp.push(kuliah);
+      }
       }
       console.log('fetch ilmu success')
       await page.close();
-      if(kuliah){
-        return kuliah;
-      }
+return temp;
     } catch (error) {
       return console.log('connection failed..');
     }
