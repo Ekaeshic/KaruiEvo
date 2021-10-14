@@ -15,17 +15,22 @@ let materi = []; //wewewwwewewe trigger heroku
 let old = [];
 
 refresh();
-setInterval(checkTugas, 300000);
+setInterval(checkTugas, 185000);
 
 function checkTugas(){
-  if(materi.length==0){
-    refresh();
+  if(materi.length==0 || !materi){
+    materi = refresh();
   }
   else{
     console.log('Mengecek....');
-    refresh();
-    setTimeout(arraysEqual, 24000, old, materi);
+    const old = materi;
+    materi = refresh();
+    setTimeout(wait, 30000);
+    arraysEqual(old, materi);
   }
+}
+function wait(){
+    console.log('comparing..');
 }
 
 function arraysEqual(a, b) {
@@ -89,71 +94,72 @@ function refresh(){
           '--disable-setuid-sandbox'
         ]
   });
+  try {
     const page = await browser.newPage();
-    try {
-      await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
-      await page.waitForSelector('#username', '19081010105');
-      await page.type("#username", "19081010105");
-      await page.type("#password", "12082001");
-      await page.click("#loginbtn");
-      console.log('connected');
-      await page.waitForNavigation();
-      old = materi;
-      materi = [];
-      for(let i=0;i<matkul.length;i++){
-        await page.goto(matkul[i][0]);
-        await page.waitForSelector('.section.img-text');
-        const kuliah = await page.evaluate(() => {
-          const scrape = document.querySelectorAll('.section.img-text .activity');
-          let submateri = [];
-          if(scrape.length>1){
-            scrape.forEach((bagian) => {
-              let judul, deskripsi, jenis;
-              const matkul = document.querySelector('#page > div.internalbanner > div > h1').textContent;
-              let link = window.location.href;
-              if(bagian.getElementsByClassName('activityinstance').length>0){
-                judul = bagian.querySelector('.instancename').textContent;
-                link = bagian.querySelector('a').getAttribute('href');
-                if(bagian.getElementsByClassName('contentafterlink').length>0){
-                  deskripsi = bagian.querySelector('.contentafterlink .no-overflow').textContent;
-                }
-                if(bagian.getElementsByClassName('accesshide').length>0){
-                  jenis = bagian.querySelector('.accesshide').textContent;                  
-                }
+    await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
+    await page.waitForSelector('#username', '19081010105');
+    await page.type("#username", "19081010105");
+    await page.type("#password", "12082001");
+    await page.click("#loginbtn");
+    console.log('connected');
+    await page.waitForNavigation();
+    materi = [];
+    for(let i=0;i<matkul.length;i++){
+      await page.goto(matkul[i][0]);
+      await page.waitForSelector('.section.img-text');
+      const kuliah = await page.evaluate(() => {
+        const scrape = document.querySelectorAll('.section.img-text .activity');
+        let submateri = [];
+        if(scrape.length>1){
+          scrape.forEach((bagian) => {
+            let judul, deskripsi, jenis;
+            const matkul = document.querySelector('#page > div.internalbanner > div > h1').textContent;
+            let link = window.location.href;
+            if(bagian.getElementsByClassName('activityinstance').length>0){
+              judul = bagian.querySelector('.instancename').textContent;
+              link = bagian.querySelector('a').getAttribute('href');
+              if(bagian.getElementsByClassName('contentafterlink').length>0){
+                deskripsi = bagian.querySelector('.contentafterlink .no-overflow').textContent;
               }
-              else if(bagian.getElementsByClassName('contentwithoutlink')){
-                judul = 'Pemberitahuan';
-                deskripsi = document.querySelector('.contentwithoutlink').textContent;
-                jenis = 'pemberitahuan';
+              if(bagian.getElementsByClassName('accesshide').length>0){
+                jenis = bagian.querySelector('.accesshide').textContent;
               }
-              if(!deskripsi) deskripsi = 'Tidak ada deskripsi..';
-              if(judul.includes(jenis)) judul = judul.replace(jenis,'');
-              if(!jenis) jenis='Tugas';
-              const tugas = {
-                'matkul': matkul,
-                'judul': judul,
-                'deskripsi': deskripsi,
-                'jenis': jenis,
-                'link': link
-              }
-              submateri.push(tugas);
-            });
-            return submateri;
-          }
-          else{
-            return;
-          }
-        });
-        if(kuliah){
-          materi.push(kuliah);
+            }
+            else if(bagian.getElementsByClassName('contentwithoutlink')){
+              judul = 'Pemberitahuan';
+              deskripsi = document.querySelector('.contentwithoutlink').textContent;
+              jenis = 'pemberitahuan';
+            }
+            if(!deskripsi) deskripsi = 'Tidak ada deskripsi..';
+            if(judul.includes(jenis)) judul = judul.replace(jenis,'');
+            if(!jenis) jenis='Tugas';
+            const tugas = {
+              'matkul': matkul,
+              'judul': judul,
+              'deskripsi': deskripsi,
+              'jenis': jenis,
+              'link': link
+            }
+            submateri.push(tugas);
+          });
+          return submateri;
         }
+        else{
+          return;
+        }
+      });
+      if(kuliah){
+        materi.push(kuliah);
       }
-      console.log('fetch ilmu success');
-      await page.close();
-    } catch (error) {
-      return console.log('connection failed..');
     }
-  })();
+    console.log('fetch ilmu success');
+  } catch (error) {
+    console.log('connection failed..');
+    materi = old; //BISMILLAH WORK AMINNNN
+  } finally {
+    await browser.close()
+  }
+})();
 }
 /*
 dsajkdsajdlasdjsalkdjsad

@@ -37,8 +37,8 @@ module.exports = {
                         '--disable-setuid-sandbox'
                         ]
                 });
+            try{
                 const page = await browser.newPage();
-try{
                 await page.goto("https://facebook.com/");
                 await page.waitForSelector("#email");
                 await page.type("#email", "kucing.upnjatim@gmail.com");
@@ -79,15 +79,15 @@ try{
                     });
                 }
                 */
-                await page.close();
-} catch (error) {
-await page.close();
+            } catch (error) {
                 console.log('failed to fetch facebook..');
                 msg.edit('Awwww... Karui gagal buka fesbuk T.T');
+            } finally {
+                await browser.close()
             }
-                })();
-        });
-    }
+        })();
+    });
+}
     
     if(!meme || count>=meme.length){
         if(used) message.channel.send('Maaf, perintah ini sedang dijalankan~');
