@@ -18,19 +18,42 @@ refresh();
 setInterval(checkTugas, 185000);
 
 function checkTugas(){
+<<<<<<< HEAD
   if(materi.length==0 || !materi){
+=======
+  if(!materi){
+>>>>>>> b8d08431f734c6e4f147da6580306f64f19d1615
     materi = refresh();
   }
   else{
     console.log('Mengecek....');
+<<<<<<< HEAD
     const old = materi;
     materi = refresh();
     setTimeout(wait, 30000);
     arraysEqual(old, materi);
+=======
+    old = materi;
+    refresh();
+    setTimeout(wait, 90000);
+    
+>>>>>>> b8d08431f734c6e4f147da6580306f64f19d1615
   }
 }
 function wait(){
     console.log('comparing..');
+<<<<<<< HEAD
+=======
+    if(old && materi){ //bismillah no buggggg amiinnnn ya allah
+        console.log(`${old.length}, 1st: ${old[0].length}`);
+       arraysEqual(old, materi);
+    }
+    else {
+        console.log('Ada yg null... Mengulang..');
+        materi = old;
+        checkTugas(); //bismillah work aminnnnn
+    }
+>>>>>>> b8d08431f734c6e4f147da6580306f64f19d1615
 }
 
 function arraysEqual(a, b) {
@@ -85,6 +108,7 @@ function arraysEqual(a, b) {
   console.log(`Perbandingan : old=${totalOld}:new=${totalNew}`);
 }
 
+//Weeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 //refresh fetch weeeeeeeeee
 function refresh(){
   (async () => {
@@ -96,6 +120,7 @@ function refresh(){
   });
   try {
     const page = await browser.newPage();
+<<<<<<< HEAD
     await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
     await page.waitForSelector('#username', '19081010105');
     await page.type("#username", "19081010105");
@@ -120,6 +145,42 @@ function refresh(){
               link = bagian.querySelector('a').getAttribute('href');
               if(bagian.getElementsByClassName('contentafterlink').length>0){
                 deskripsi = bagian.querySelector('.contentafterlink .no-overflow').textContent;
+=======
+    try {
+      await page.goto("https://ilmu.upnjatim.ac.id/login/index.php?authCAS=NOCAS");
+      await page.waitForSelector('#username', '19081010105');
+      await page.type("#username", "19081010105");
+      await page.type("#password", "12082001");
+      await page.click("#loginbtn");
+      console.log('connected');
+      await page.waitForNavigation();
+      materi = [];
+      for(let i=0;i<matkul.length;i++){
+        await page.goto(matkul[i][0]);
+        await page.waitForSelector('.section.img-text');
+        const kuliah = await page.evaluate(() => {
+          const scrape = document.querySelectorAll('.section.img-text .activity');
+          let submateri = [];
+          if(scrape.length>1){
+            scrape.forEach((bagian) => {
+              let judul, deskripsi, jenis;
+              const matkul = document.querySelector('#page > div.internalbanner > div > h1').textContent;
+              let link = window.location.href;
+              if(bagian.getElementsByClassName('activityinstance').length>0){
+                judul = bagian.querySelector('.instancename').textContent;
+                link = bagian.querySelector('a').getAttribute('href');
+                if(bagian.getElementsByClassName('contentafterlink').length>0){
+                  deskripsi = bagian.querySelector('.contentafterlink .no-overflow').textContent;
+                }
+                if(bagian.getElementsByClassName('accesshide').length>0){
+                  jenis = bagian.querySelector('.accesshide').textContent;                  
+                }
+              }
+              else if(bagian.getElementsByClassName('contentwithoutlink')){
+                judul = 'Pemberitahuan';
+                deskripsi = document.querySelector('.contentwithoutlink').textContent;
+                jenis = 'pemberitahuan';
+>>>>>>> b8d08431f734c6e4f147da6580306f64f19d1615
               }
               if(bagian.getElementsByClassName('accesshide').length>0){
                 jenis = bagian.querySelector('.accesshide').textContent;
@@ -151,6 +212,15 @@ function refresh(){
       if(kuliah){
         materi.push(kuliah);
       }
+<<<<<<< HEAD
+=======
+      console.log('fetch ilmu success');
+      await page.close();
+    } catch (error) {
+      return console.log('connection failed..');
+      materi = old; //BISMILLAH WORK AMINNNN
+      await page.close();
+>>>>>>> b8d08431f734c6e4f147da6580306f64f19d1615
     }
     console.log('fetch ilmu success');
   } catch (error) {
